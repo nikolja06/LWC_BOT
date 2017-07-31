@@ -81,7 +81,7 @@ public class AttendanceDaoImpl implements IAttendanceDao{
 
     @Override
     public Attendance getLastByUserId(long userId) {
-        query = "SELECT * FROM ATTENDANCE " +
+        query = "SELECT * FROM ATTENDANCE t " +
                 "INNER JOIN (" +
                 "    SELECT user_id, max(date) AS MaxDate" +
                 "    FROM ATTENDANCE" +
@@ -104,7 +104,7 @@ public class AttendanceDaoImpl implements IAttendanceDao{
 
     @Override
     public List<Attendance> getLastCountByUserId(int count, long userId) {
-        query = "SELECT * FROM mytable WHERE user_id = ? ORDER BY date DESC LIMIT ?;";
+        query = "SELECT * FROM ATTENDANCE WHERE user_id = ? ORDER BY date DESC LIMIT ?;";
 
         List<Attendance> attendances = new ArrayList<>();
 
@@ -171,6 +171,7 @@ public class AttendanceDaoImpl implements IAttendanceDao{
             attendance.setDate(resultSet.getDate("date"));
             attendance.setPresent(resultSet.getBoolean("is_present"));
             attendance.setUserId(resultSet.getLong("user_id"));
+            attendance.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
