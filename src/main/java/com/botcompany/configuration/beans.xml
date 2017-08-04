@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="controlFactory" class="com.botcompany.control.ControlFactory"/>
+
+    <bean id="controlGet" name="controlGet" class="com.botcompany.control.ControlGet">
+        <property name="steps">
+            <list>
+                <ref bean="step_1"/>
+                <ref bean="step_2"/>
+            </list>
+        </property>
+        <property name="isStepChanged" value="false"/>
+        <property name="currentStep" value="null"/>
+    </bean>
+
+    <bean id = "step_1" class="com.botcompany.entities.Step">
+        <property name="message" value=""/>
+        <property name="stepNumber" value="1"/>
+        <property name="buttons">
+            <list value-type="com.botcompany.entities.Button">
+                <bean name="btn_1" class="com.botcompany.entities.Button">
+                    <property name="name" value="yes"/>
+                    <property name="text" value="yes"/>
+                    <property name="callBack" value="/yes"/>
+                </bean>
+                <bean name="btn_2" class="com.botcompany.entities.Button">
+                    <property name="name" value="no"/>
+                    <property name="text" value="no"/>
+                    <property name="callBack" value="no"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="step_2" class="com.botcompany.entities.Step">
+        <property name="message" value=""/>
+        <property name="stepNumber" value="2"/>
+        <property name="buttons">
+            <list value-type="com.botcompany.entities.Button">
+                <bean name="btn_1" class="com.botcompany.entities.Button">
+                    <property name="name" value="yes"/>
+                    <property name="text" value="yes"/>
+                    <property name="callBack" value="/yes"/>
+                </bean>
+                <bean name="btn_2" class="com.botcompany.entities.Button">
+                    <property name="name" value="no"/>
+                    <property name="text" value="no"/>
+                    <property name="callBack" value="/no"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

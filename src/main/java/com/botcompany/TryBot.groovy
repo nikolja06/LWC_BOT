@@ -1,9 +1,12 @@
 package com.botcompany;
 
 
+import com.botcompany.control.ControlFactory;
+import com.botcompany.control.IControl;
 import com.vdurmont.emoji.EmojiLoader;
 import com.vdurmont.emoji.EmojiManager;
 import com.vdurmont.emoji.EmojiParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.ForwardMessage;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -34,9 +37,16 @@ public class TryBot extends TelegramLongPollingBot{
     private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MMMM.yyyy");
 
 
+    @Autowired
+    ControlFactory controlFactory
+    private IControl control
+
+
     public void onUpdateReceived(Update update) {
 
         if (update.hasMessage() || update.hasCallbackQuery()) {
+
+            control = controlFactory.getControl()
 
 //            String message = update.getMessage().getText().trim().toLowerCase();
             String message;
