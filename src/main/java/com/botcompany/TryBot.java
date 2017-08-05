@@ -1,22 +1,18 @@
 package com.botcompany;
 
 
-import com.vdurmont.emoji.EmojiLoader;
-import com.vdurmont.emoji.EmojiManager;
 import com.vdurmont.emoji.EmojiParser;
-import org.telegram.telegrambots.api.methods.ForwardMessage;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
-import java.sql.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -32,6 +28,10 @@ public class TryBot extends TelegramLongPollingBot{
     private String currentMember;
     private String text = null;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("dd.MMMM.yyyy");
+
+    private Message sentMessage;
+    private Long chatId;
+    private Integer previousMessageId;
 
 
     public void onUpdateReceived(Update update) {
@@ -69,7 +69,7 @@ public class TryBot extends TelegramLongPollingBot{
                 }
 
                 try {
-                    sendMessage(sendMessage);
+                   sentMessage = sendMessage(sendMessage);
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
@@ -179,6 +179,9 @@ public class TryBot extends TelegramLongPollingBot{
     }
 
 
+
+
+
     private SendMessage createMessage(Update update, ReplyKeyboard keyboard, String text){
         SendMessage message = new SendMessage()
                 .setText(text)
@@ -197,7 +200,7 @@ public class TryBot extends TelegramLongPollingBot{
     }
 
 
-    private ReplyKeyboard createInlineButtons(String... btnText){
+    private InlineKeyboardMarkup createInlineButtons(String... btnText){
         InlineKeyboardMarkup ikm = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> buttons = new ArrayList<>();
         for (String text : btnText) {
