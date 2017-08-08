@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean name="buttonYes" class="com.botcompany.entties.Button">
+        <property name="text" value="YES"/>
+        <property name="callBackData" value="yes"/>
+    </bean>
+
+    <bean name="buttonNo" class="com.botcompany.entties.Button">
+        <property name="text" value="NO"/>
+        <property name="callBackData" value="no"/>
+    </bean>
+
+    <bean name="buttonEdit" class="com.botcompany.entties.Button">
+        <property name="text" value="EDIT"/>
+        <property name="callBackData" value="edit"/>
+    </bean>
+
+    <bean name="buttonSend" class="com.botcompany.entties.Button">
+        <property name="text" value="SEND"/>
+        <property name="callBackData" value="send"/>
+    </bean>
+
+    <bean name="buttonShareLocation" class="com.botcompany.entties.Button">
+        <property name="text" value="Share Location"/>
+        <property name="callBackData" value="shareLocation"/>
+    </bean>
+
+</beans>

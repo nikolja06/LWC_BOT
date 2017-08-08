@@ -11,12 +11,8 @@ public class ControllerGet extends BaseControl implements IController{
 
     private List<Step> steps;
     private Step currentStep;
-    private List<String> commands;
 
-
-    public ControllerGet(List<Step> steps) {
-        this.steps = steps;
-        currentStep = steps.get(0);
+    public ControllerGet() {
     }
 
     @Override
@@ -36,6 +32,13 @@ public class ControllerGet extends BaseControl implements IController{
         return null;
     }
 
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
+    }
+
+    public void setCurrentStep(Step currentStep) {
+        this.currentStep = currentStep;
+    }
 
 /*    chatId = update.getCallbackQuery().getMessage().getChatId();
     previousMessageId = update.getCallbackQuery().getMessage().getMessageId();

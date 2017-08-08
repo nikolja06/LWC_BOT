@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="ButtonsBeans.xml"/>
+
+    <bean name="controllerGetSteps" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="step1"/>
+                <ref bean="step2"/>
+                <ref bean="step3"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean name="step1" class="com.botcompany.entties.Step">
+        <property name="buttons">
+            <list>
+                <ref bean="buttonYes"/>
+                <ref bean="buttonNo"/>
+            </list>
+        </property>
+        <property name="edited" value="false"/>
+        <property name="messageText" value="This is Message text"/>
+    </bean>
+
+    <bean name="step2" class="com.botcompany.entties.Step"/>
+    <bean name="step3" class="com.botcompany.entties.Step"/>
+
+</beans>

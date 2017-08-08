@@ -1,10 +1,11 @@
 package com.botcompany;
 
 
+import com.botcompany.controls.IController;
+import com.botcompany.utils.ControllerFactory;
 import com.vdurmont.emoji.EmojiParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
-import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageReplyMarkup;
-import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -17,8 +18,15 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
 public class TryBot extends TelegramLongPollingBot{
 
+    // new
+    @Autowired
+    private ControllerFactory factory;
+    private IController controller;
+
+    // old
     private Map<String, Boolean> result;
     private List<String> members;
     private static final String yes = "YES";
@@ -35,6 +43,13 @@ public class TryBot extends TelegramLongPollingBot{
 
 
     public void onUpdateReceived(Update update) {
+
+        String command = update.hasCallbackQuery() && update.getCallbackQuery().getMessage().isCommand() ?
+                                 update.getCallbackQuery().getMessage().getText() :
+                                 update.hasMessage() && update.getMessage().isCommand() ? update.getMessage().getText() : null ;
+        if (command != null)
+            controller = factory.initController(command);
+
 
         if (update.hasMessage() || update.hasCallbackQuery()) {
 

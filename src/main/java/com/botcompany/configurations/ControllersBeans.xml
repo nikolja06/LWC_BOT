@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="ControllerGet.xml"/>
+
+    <bean name="controllerFactory" class="com.botcompany.utils.ControllerFactory"/>
+
+    <bean name="controllerGet" class="com.botcompany.controls.ControllerGet">
+        <property name="steps" ref="controllerGetSteps"/>
+        <property name="currentStep" ref="step1"/>
+    </bean>
+
+</beans>

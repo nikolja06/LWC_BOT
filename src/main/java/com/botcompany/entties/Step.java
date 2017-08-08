@@ -12,11 +12,11 @@ public class Step {
     public Step() {
     }
 
-    public Step(String messageText, List<Button> buttons, boolean isEdited) {
-        this.messageText = messageText;
-        this.buttons = buttons;
-        this.isEdited = isEdited;
-    }
+//    public Step(String messageText, List<Button> buttons, boolean isEdited) {
+//        this.messageText = messageText;
+//        this.buttons = buttons;
+//        this.isEdited = isEdited;
+//    }
 
     public String getMessageText() {
         return messageText;
